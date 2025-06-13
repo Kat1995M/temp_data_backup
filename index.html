@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>requiem1897</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div id="overlay">
+    <div id="disclaimer">
+      <div id="language-switch">
+        <button onclick="setLanguage('en')">EN</button>
+        <button onclick="setLanguage('zh')">中文</button>
+        <button onclick="setLanguage('de')">DE</button>
+      </div>
+      <div id="message-en" class="message">
+        <p>This site contains historical material which may include extremist or offensive content. It does not endorse any such views. For educational and archival purposes only.</p>
+        <button onclick="acceptDisclaimer()">I Understand</button>
+      </div>
+      <div id="message-zh" class="message hidden">
+        <p>本网站包含可能具有极端或冒犯性的历史资料，仅供学术研究与档案用途使用，本站不认同其中任何观点。</p>
+        <button onclick="acceptDisclaimer()">我理解</button>
+      </div>
+      <div id="message-de" class="message hidden">
+        <p>Diese Website enthält historisches Material, das extremistische oder anstößige Inhalte enthalten kann. Sie billigt keine dieser Ansichten. Nur für Bildungs- und Archivzwecke.</p>
+        <button onclick="acceptDisclaimer()">Ich verstehe</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content">
+    <h1>Welcome to requiem1897.org</h1>
+    <p>This will become the archive index page.</p>
+  </div>
+</body>
+</html>
