@@ -1,39 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex, nofollow" />
-  <title>requiem1897</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
+  <meta charset="UTF-8">
+  <title>Multilingual Diary Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: "Courier New", monospace; background: #f9f9f9; padding: 2em; line-height: 1.6; }
+    .language-toggle { margin-bottom: 1em; }
+    .language-toggle button { margin-right: 10px; }
+    .entry { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1em; margin-bottom: 2em; }
+    .entry div { padding: 1em; background: #fff; border: 1px solid #ccc; }
+    .note-ref { font-size: 0.8em; color: #555; cursor: pointer; position: relative; top: -0.4em; }
+    .notes { margin-top: 2em; }
+    .note { margin-bottom: 1em; }
+    .back-link { display: none; margin-bottom: 1em; color: blue; cursor: pointer; }
+    @media (max-width: 768px) {
+      .entry { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-  <div id="overlay">
-    <div id="disclaimer">
-      <div id="language-switch">
-        <button onclick="setLanguage('en')">EN</button>
-        <button onclick="setLanguage('zh')">中文</button>
-        <button onclick="setLanguage('de')">DE</button>
-      </div>
-      <div id="message-en" class="message">
-        <p>This site contains historical material which may include extremist or offensive content. It does not endorse any such views. For educational and archival purposes only.</p>
-        <button onclick="acceptDisclaimer()">I Understand</button>
-      </div>
-      <div id="message-zh" class="message hidden">
-        <p>本网站包含可能具有极端或冒犯性的历史资料，仅供学术研究与档案用途使用，本站不认同其中任何观点。</p>
-        <button onclick="acceptDisclaimer()">我理解</button>
-      </div>
-      <div id="message-de" class="message hidden">
-        <p>Diese Website enthält historisches Material, das extremistische oder anstößige Inhalte enthalten kann. Sie billigt keine dieser Ansichten. Nur für Bildungs- und Archivzwecke.</p>
-        <button onclick="acceptDisclaimer()">Ich verstehe</button>
-      </div>
-    </div>
+  <div class="language-toggle">
+    <button onclick="showAll()">对照阅读模式</button>
+    <button onclick="showOnly('de')">仅显示德语原文</button>
+    <button onclick="showOnly('en')">仅显示英语译文</button>
+    <button onclick="showOnly('zh')">仅显示汉语译文</button>
+  </div>
+  <div class="entry">
+    <div class="de">Ich fühle mich leer.</div>
+    <div class="en">I feel empty.</div>
+    <div class="zh">我感到空虚。<sup class="note-ref" onclick="scrollToNote(1)">①</sup></div>
   </div>
 
-  <div id="content">
-    <h1>Welcome to requiem1897.org</h1>
-    <p>This will become the archive index page.</p>
+  <div class="back-link" id="backLink" onclick="goBack()">↑ 回到阅读位置</div>
+
+  <div class="notes" id="notes">
+    <div class="note" id="note1"><strong>①</strong> 此处的“空虚”原文为“leer”，该词在德语中可能同时带有“没有意义”之意。</div>
   </div>
+
+  <script>
+    function showAll() {
+      document.querySelectorAll('.de, .en, .zh').forEach(el => {
+        el.style.display = 'block';
+      });
+    }
+
+    function showOnly(lang) {
+      ['de', 'en', 'zh'].forEach(code => {
+        document.querySelectorAll('.' + code).forEach(el => {
+          el.style.display = (code === lang) ? 'block' : 'none';
+        });
+      });
+    }
+
+    let scrollPosition = 0;
+    function scrollToNote(id) {
+      scrollPosition = window.scrollY;
+      document.getElementById('notes').scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('backLink').style.display = 'block';
+    }
+
+    function goBack() {
+      window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+      document.getElementById('backLink').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
